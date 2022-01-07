@@ -1,0 +1,42 @@
+﻿@model Market.WebUI.ViewModels.LoginViewModel
+
+    <hr class="uk-divider-icon">
+
+<br>
+<div class="uk-flex uk-flex-center">
+
+    <form asp-controller="Account" asp-action="Login" method="post" role="form" class="uk-form-stacked">
+        <div asp-validation-summary="All" class="uk-text-danger"></div>
+        <h2 class="uk-legend">Please log in...</h2>
+
+        <input type="hidden" asp-for="ReturnUrl" />
+
+        <label class="uk-form-label" for="email">Email</label>
+        <div class="uk-margin">
+            <fieldset class="uk-fieldset ">
+
+
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: mail"></span>
+                    <input class="uk-input" type="text" id="email"
+                           asp-for="Email">
+                </div>
+
+
+            </fieldset>
+        </div>
+
+        <label class="uk-form-label" for="password">Password</label>
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                <input class="uk-input" type="password" id="password" asp-for="Password">
+            </div>
+        </div>
+
+        <input type="submit" class="uk-button uk-button-default uk-width-1-1" value="Log in" />
+
+    </form>
+
+</div>
+

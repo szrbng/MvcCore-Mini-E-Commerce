@@ -1,0 +1,24 @@
+﻿@model Market.WebUI.ViewModels.ProductListViewModel
+
+@{ ViewBag.Title = "title"; Layout = "_Layout"; }
+
+<br>
+
+<hr class="uk-divider-icon">
+<div class="container-fluid padding">
+    <div class="row">
+
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-lg-3 mb-4">
+
+                @await Html.PartialAsync("ProductCard", product)
+
+            </div>
+        }
+
+    </div>
+</div>
+
+
+

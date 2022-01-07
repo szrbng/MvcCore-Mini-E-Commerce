@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using Market.Entities
+
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@if (User.Identity.IsAuthenticated)
+{
+
+
+    <li>
+        <form asp-area="" asp-controller="Product" asp-action="ProductList2" method="get">
+            <button class="uk-button uk-button-text" type="submit">Ürün Listesi</button>
+        </form>
+    </li>
+
+    <li>
+        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+            <button class="uk-button uk-button-text" type="submit">Log out</button>
+
+        </form>
+    </li>
+
+
+
+}
+else
+{
+
+    <li>
+        <a class="uk-link-text" id="loginLink" asp-controller="Account" asp-action="Login">Log in</a>
+    </li>
+
+}

@@ -1,0 +1,88 @@
+﻿@model Market.Entities.Product
+
+
+
+    <div class="uk-container uk-align-center">
+
+
+        <form asp-action="CreateProduct" method="post" role="form" enctype="multipart/form-data" class="uk-form-width-large uk-align-center">
+
+            <!-- <div asp-validation-summary="All" class="uk-text-danger"></div> onsubmit="return AjaxPost(this) -->
+
+            <h2 class="uk-text-center">Please fill the form to complete the Product</h2>
+
+            <div class="uk-margin">
+                <fieldset class="uk-fieldset">
+                    <label class="uk-form-label" asp-for="@Model.UploadImage"></label>
+
+                    <div class="uk-form-controls">
+
+                        <input type="file" class="uk-input" accept="img/*" asp-for="@Model.UploadImage" />
+                        <span asp-validation-for="@Model.UploadImage" class="uk-text-danger"></span>
+                    </div>
+
+                </fieldset>
+            </div>
+
+            <div class="uk-margin">
+                <fieldset class="uk-fieldset">
+                    <label class="uk-form-label" asp-for="@Model.Name"></label>
+
+                    <div class="uk-form-controls">
+                        <input class="uk-input" asp-for="@Model.Name" />
+                        <span asp-validation-for="@Model.Name" class="uk-text-danger"></span>
+                    </div>
+
+                </fieldset>
+            </div>
+
+            <div class="uk-margin">
+                <fieldset class="uk-fieldset">
+                    <label class="uk-form-label" asp-for="@Model.Description"></label>
+
+                    <div class="uk-form-controls">
+                        <input class="uk-input" asp-for="@Model.Description" />
+                        <span asp-validation-for="@Model.Description" class="uk-text-danger"></span>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="uk-margin">
+                <fieldset class="uk-fieldset">
+
+                    <div class="uk-form-controls" style="width:100px;">
+
+                        <select class="uk-select" asp-for="@Model.CategoryId" asp-items="ViewBag.CategoryId"></select>
+
+                    </div>
+
+                </fieldset>
+            </div>
+
+            <div class="uk-margin">
+                <fieldset class="uk-fieldset">
+                    <label class="uk-form-label" asp-for="@Model.Price"></label>
+
+                    <div class="uk-form-controls">
+                        <input class="uk-input" asp-for="@Model.Price" />
+                        <span asp-validation-for="@Model.Price" class="uk-text-danger"></span>
+                    </div>
+
+                </fieldset>
+            </div>
+
+            <div class="uk-margin">
+                <fieldset class="uk-fieldset">
+
+                    <div class="uk-form-controls">
+                        <input type="submit" value="Create Product" id="btnCreate" class="uk-button uk-button-default" />
+                    </div>
+
+                </fieldset>
+            </div>
+
+        </form>
+
+    </div>
+
+

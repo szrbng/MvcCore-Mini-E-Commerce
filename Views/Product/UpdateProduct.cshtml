@@ -1,0 +1,71 @@
+﻿@model Market.Entities.Product
+
+
+<form asp-controller="Product" asp-action="UpdateProduct" method="post" enctype="multipart/form-data" class="col-md-11 mt-3 ml-3">
+    <h2 class="mb-3">Update Product</h2>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Product ID</label>
+                    <div class="col-md-10">
+                        <input asp-for="ProductId" value="@Model.ProductId" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Image</label>
+                    <div class="col-md-10">
+                        <input type="hidden" name="ImageUrl" value="@Model.ImageUrl" />
+                        <img src="~/img/@Model.ImageUrl" width="100" height="70" />
+                        <input type="file" name="file" />
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Product Name</label>
+                    <div class="col-md-10">
+                        <input asp-for="Name" value="@Model.Name" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Description</label>
+                    <div class="col-md-10">
+                        <input asp-for="Description" value="@Model.Description" class="form-control" />
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Price</label>
+                    <div class="col-md-10">
+                        <input asp-for="Price" value="@Model.Price" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label">Category</label>
+                    <div class="col-md-10">
+                        <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-control"></select>
+                      
+                    </div>
+                </div>
+
+                <div style="margin-left:130px">
+                    <p style="color:red">Attention !!! If there is no discount, enter the same values ​​for the normal price and the discount price.</p>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-10 offset-md-2">
+                        <button type="submit" value="Update" class="btn btn-primary" style="width:100px">Update</button>
+                        <a asp-action="ProductList2" asp-controller="Product" class="btn btn-warning" value="Cancel" style="width:100px">Cancel</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

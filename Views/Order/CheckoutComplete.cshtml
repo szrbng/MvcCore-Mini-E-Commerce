@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<script type="text/javascript">
+        swal({
+            title: "TEBRİKLER!",
+            text: "Siparişiniz Alınmıştır İyi Günler Dileriz",
+            icon: "success",
+            button: "OK",
+        })
+            .then((button) => {
+                switch (button) {
+
+                    case "OK":
+                           window.location.href = "@Url.Action("Index", "Home")"
+                        break;
+
+                    default:
+                        window.location.href = "@Url.Action("Index", "Home")"
+                }
+            });
+</script>
+
+

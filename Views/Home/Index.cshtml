@@ -1,0 +1,33 @@
+﻿@model Market.WebUI.ViewModels.ProductListViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<br>
+<hr class="uk-divider-icon">
+<div class="container-fluid padding">
+    <div class="row">
+
+        @foreach (var product in Model.Products)
+        {
+        <div class="col-lg-3 mb-4">
+
+            @await Html.PartialAsync("ProductCard", product)
+
+        </div>
+                }
+            
+        </div>
+</div>
+
+
+
+
+
+

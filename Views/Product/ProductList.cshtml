@@ -1,0 +1,167 @@
+﻿@model IEnumerable<Market.Entities.Product>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<div class="modal" tabindex="-1" role="dialog" id="mymodal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ürün Sil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bu kaydı silmek istediğinizden emin misiniz?.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btnCancel">Close</button>
+                <button type="button" class="btn btn-primary" id="btnDelete" data-dismiss="modal" onclick="return Delele()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <br>
+    <div class="uk-container">
+        <hr class="uk-divider-icon">
+        <h3 class="uk-text-center">Ürünler Listesi</h3>
+
+        <a class="uk-button uk-button-default"
+           asp-controller="Product" asp-action="CreateProduct">Create Product</a>
+        <!-- TABLE -->
+        <div class="uk-overflow-auto">
+            <table class="uk-table uk-table-striped uk-table-bordered uk-table-small">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th class="uk-text-right">Price</th>
+                        <th class="uk-text-right">Category</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var line in Model)
+                    {
+                        <tr id="row_@line.ProductId">
+                            <td>
+
+                                <img src="@(string.IsNullOrEmpty(line.ImageUrl) ? "/img/photo.jpg" : line.ImageUrl)" class="img-thumbnail" />
+
+                            </td>
+                            <td>@line.Name</td>
+                            <td class="uk-text-right">@line.Price.ToString("c")</td>
+                            <td class="uk-text-right">@line.Category.CategoryName</td>
+
+                            <td class="uk-text-right" id="cart">
+                                <a class="uk-button uk-button-default"
+                                   asp-controller="ShoppingCart"
+                                   asp-action="AddToShoppingCart"
+                                   asp-route-productId="@line.ProductId" onclick="myFunction()">
+                                    Add to Cart
+                                </a>
+                            </td>
+
+                            <td class="uk-text-right">
+
+                                <a href="#" class="uk-button uk-button-danger showModal" onclick="ConfirmDelete(@line.ProductId)">Delete</a>
+
+                            </td>
+
+                            <td class="uk-text-right">
+
+                                <a class="uk-button uk-button-default"
+                                   asp-controller="Product" asp-action="UpdateProduct" asp-route-productId="@line.ProductId">Guncelle</a>
+                            </td>
+
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+
+        </div>
+        <!-- TABLE -->
+
+
+    </div>
+}
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<input type="hidden" id="productId" />
+
+<script type="text/javascript">
+
+
+    var ConfirmDelete = function (id) {
+
+        $("#productId").val(id);
+        $("#mymodal").modal('show');
+
+    }
+
+        $('#btnCancel').click(function () {
+
+            window.location.href = "/Product/ProductList";
+
+        });
+
+   /*var ProductDelete = function () {
+
+        var propId = $("#productId").val();
+
+        $.ajax({
+
+            type: "POST",
+            url: "/Product/DeleteProduct",
+            data: { Id: propId },
+            success: function (result) {
+
+                $("#myModal").modal("hide");
+                $("#row_" + propId).remove();
+
+            }
+
+        })
+
+    }*/
+
+    function Delele(ID) {
+
+
+        if ($('#btnDelete').click)(function () {
+
+
+            $.ajax({
+                url: "/Product/DeleteProduct/" + ID,
+                type: "POST",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    loadData();
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            })
+    
+    })
+
+    }
+       
+    
+
+    
+
+</script>
+
+
